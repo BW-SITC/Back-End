@@ -5,7 +5,8 @@ module.exports = {
   find,
   findBy,
   findById,
-  remove,
+  findMeetings,
+  removeMeeting,
 };
 
 function find() {
@@ -15,6 +16,11 @@ function find() {
 function findBy(filter) {
   return db('users').where(filter);
 }
+function findMeetings(userId) {
+    return db('meetings')
+      .join('users', 'user.id', 'meetings.user_id')
+      .where({ user_id: userId });
+  }
 
 async function add(user) {
   const [id] = await db('users').insert(user);
@@ -29,8 +35,8 @@ function findById(id) {
       .first();
   }
 
-function remove(id) {
-    return db('users')
+function removeMeeting(id) {
+    return db('meetings')
     .where('id', id)
     .del();
 }
