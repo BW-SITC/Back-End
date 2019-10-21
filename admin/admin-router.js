@@ -27,7 +27,7 @@ router.post('/:id/todos', (req, res) => {
       res.status(500).json({ message: 'Failed to create new todo' });
     });
   });
-  router.put('/:id/todo', (req, res) => {
+  router.put('/:id/todos', (req, res) => {
     const { id } = req.params;
     const changes = req.body;
   

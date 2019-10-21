@@ -6,7 +6,7 @@ const authRouter = require('../auth/auth-router.js');
 const adminRouter = require('../admin/admin-router.js');
 const volunteerRouter = require('../volunteer/volunteer-router.js');
 const checkAdmin = require('../auth/check-admin');
-
+const studentRouter = require('../student/student-router')
 
 const server = express();
 
@@ -15,7 +15,7 @@ server.use(cors());
 server.use(express.json());
 
 server.use('/api/auth', authRouter);
-server.use('/api/admin', restricted, checkAdmin('admin'), adminRouter);
+server.use('/api/admin', restricted, adminRouter);
 server.use('/api/volunteer/', restricted, volunteerRouter);
 server.use('/api/student/', studentRouter);
 

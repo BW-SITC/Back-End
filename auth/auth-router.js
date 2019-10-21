@@ -7,9 +7,9 @@ const secrets = require('../config/secrets.js');
 
 // for endpoints beginning with /api/auth
 router.post('/register/admin', (req, res) => {
-    let user = req.body;
-    const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
-    user.password = hash;
+    let admin = req.body;
+    const hash = bcrypt.hashSync(admin.password, 10); // 2 ^ n
+    admin.password = hash;
   
     Users.addAdmin(admin)
       .then(saved => {
@@ -23,10 +23,10 @@ router.post('/register/admin', (req, res) => {
   router.post('/login/admin', (req, res) => {
     let { username, password } = req.body;
   
-    Users.findBy({ username })
+    Users.findAdminBy({ username })
       .first()
       .then(admin => {
-        if (admin && bcrypt.compareSync(password, user.password)) {
+        if (admin && bcrypt.compareSync(password, admin.password)) {
           // produce token
           const token = generateToken(admin);
   

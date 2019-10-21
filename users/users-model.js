@@ -5,7 +5,9 @@ module.exports = {
   addAdmin,
   find,
   findBy,
+  findAdminBy,
   findById,
+  findAdminById,
   findMeetings,
   addMeeting,
   removeMeeting,
@@ -14,7 +16,7 @@ module.exports = {
   addTodo,
   removeTodo,
   updateTodo,
-
+  
 };
 
 function find() {
@@ -24,11 +26,14 @@ function find() {
 function findBy(filter) {
   return db('users').where(filter);
 }
+function findAdminBy(filter) {
+  return db('admin').where(filter);
+}
 
 async function addAdmin(admin) {
   const [id] = await db('admin').insert(admin);
 
-  return findById(id);
+  return findAdminById(id);
 }
 
 async function add(user) {
@@ -36,16 +41,22 @@ async function add(user) {
 
   return findById(id);
 }
-
+function findAdminById(id) {
+  return db('admin')
+    .select('id', 'username')
+    .where({ id })
+    .first();
+}
 function findById(id) {
     return db('users')
-      .select('id', 'username')
+      .select('id', 'name','days','availibleTime','country' )
       .where({ id })
       .first();
   }
   function findMeetings(userId) {
     return db('meetings')
-      .join('users', 'user.id', 'meetings.user_id')
+      .join('users', 'users.id', 'meetings.user_id')
+      .select('meetings.meetingTime')
       .where({ user_id: userId });
   }
   function addMeeting(meeting, id) {
@@ -66,7 +77,8 @@ function removeMeeting(id) {
 
 function findTodos(userId) {
   return db('todos')
-    .join('users', 'user.id', 'todos.user_id')
+    .join('users', 'users.id', 'todos.user_id')
+    .select('todos.instructions')
     .where({ user_id: userId });
 }
 function addTodo(todo, id) {

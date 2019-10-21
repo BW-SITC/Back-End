@@ -2,7 +2,7 @@ exports.up = function(knex) {
     return knex.schema
     
     .createTable('admin', admin => {
-      users.increments();
+      admin.increments();
   
       admin
         .string('username', 128)
@@ -53,6 +53,7 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
     return knex.schema
+    .dropTableIfExists('admin')
     .dropTableIfExists('users')
    .dropTableIfExists('meetings')
    .dropTableIfExists('todos')
