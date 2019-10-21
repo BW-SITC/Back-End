@@ -18,7 +18,7 @@ module.exports = {
 };
 
 function find() {
-  return db('users').select('id', 'name','day','availibleTime','country' );
+  return db('users').select('id', 'name','days','availibleTime','country' );
 }
 
 function findBy(filter) {

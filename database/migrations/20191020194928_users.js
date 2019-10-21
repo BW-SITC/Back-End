@@ -19,16 +19,13 @@ exports.up = function(knex) {
           .unique();
         users.string('password', 128).notNullable();
         users.string('name')
-        users.string('day')
+        users.string('days')
         users.string('availibleTime', 128)
         users.string("country")
         
       })
       .createTable('meetings', tbl => {
         tbl.increments();
-        tbl.integer('meeting_number')
-          .unsigned()
-          .notNullable();
         tbl.text('meetingTime')
           .notNullable();
         tbl.integer('user_id')
@@ -41,9 +38,6 @@ exports.up = function(knex) {
       })
       .createTable('todos', tbl => {
         tbl.increments();
-        tbl.integer('todo_number')
-          .unsigned()
-          .notNullable();
         tbl.text('instructions')
           .notNullable();
         tbl.integer('user_id')
