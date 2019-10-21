@@ -39,9 +39,9 @@ exports.up = function(knex) {
           .onUpdate('CASCADE')
           .onDelete('CASCADE');
       })
-      .createTable('steps', tbl => {
+      .createTable('todos', tbl => {
         tbl.increments();
-        tbl.integer('step_number')
+        tbl.integer('todo_number')
           .unsigned()
           .notNullable();
         tbl.text('instructions')
@@ -61,5 +61,5 @@ exports.down = function(knex) {
     return knex.schema
     .dropTableIfExists('users')
    .dropTableIfExists('meetings')
-   .dropTableIfExists('steps')
+   .dropTableIfExists('todos')
 };

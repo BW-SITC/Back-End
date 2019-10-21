@@ -9,9 +9,11 @@ module.exports = {
   findMeetings,
   addMeeting,
   removeMeeting,
-  findSteps,
-  addSteps,
-  removeSteps,
+  updateMeeting,
+  findTodos,
+  addTodo,
+  removeTodo,
+  updateTodo,
 
 };
 
@@ -46,8 +48,14 @@ function findById(id) {
       .join('users', 'user.id', 'meetings.user_id')
       .where({ user_id: userId });
   }
-  function addMeeting(meeting) {
+  function addMeeting(meeting, id) {
     return db('meetings').insert(meeting)
+    .where({ user_id: id });
+  }
+  function updateMeeting(changes, id) {
+    return db('meetings')
+      .where({ id })
+      .update(changes);
   }
 
 function removeMeeting(id) {
@@ -56,17 +64,23 @@ function removeMeeting(id) {
     .del();
 }
 
-function findSteps(userId) {
-  return db('steps')
-    .join('users', 'user.id', 'steps.user_id')
+function findTodos(userId) {
+  return db('todos')
+    .join('users', 'user.id', 'todos.user_id')
     .where({ user_id: userId });
 }
-function addSteps(step) {
-  return db('steps').insert(step)
+function addTodo(todo, id) {
+  return db('todos').insert(todo)
+  .where({ user_id: id });
+}
+function updateTodo(changes, id) {
+  return db('todos')
+    .where({ id })
+    .update(changes);
 }
 
-function removeSteps(id) {
-  return db('steps')
+function removeTodo(id) {
+  return db('todos')
   .where('id', id)
   .del();
 }

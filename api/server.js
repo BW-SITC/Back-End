@@ -1,11 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const authenticate = require('../auth/authenticate-middleware.js');
+const restricted = require('../auth/restricted-middleware.js');
 const authRouter = require('../auth/auth-router.js');
 const adminRouter = require('../admin/admin-router.js');
 const volunteerRouter = require('../volunteer/volunteer-router.js');
-
+const checkAdmin = require('../auth/check-admin');
 
 
 const server = express();
@@ -15,8 +15,8 @@ server.use(cors());
 server.use(express.json());
 
 server.use('/api/auth', authRouter);
-server.use('/api/admin', authenticateAdmin, adminRouter);
-server.use('/api/volunteer/', authenticateVolunteer, volunteerRouter);
+server.use('/api/admin', restricted, checkAdmin('admin'), adminRouter);
+server.use('/api/volunteer/', restricted, volunteerRouter);
 server.use('/api/student/', studentRouter);
 
 
