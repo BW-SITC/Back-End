@@ -11,12 +11,12 @@ router.post('/register', (req, res) => {
   const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
   user.password = hash;
 
-  Users.addAdmin(admin)
+  Users.add(user)
     .then(saved => {
       res.status(201).json(saved);
     })
     .catch(error => {
-      res.status(500).json({ message: 'cannot add the admin', error });
+      res.status(500).json({ message: 'cannot add the user', error });
     });
 });
 
@@ -25,14 +25,14 @@ router.post('/login', (req, res) => {
 
   Users.findBy({ username })
     .first()
-    .then(admin => {
-      if (admin && bcrypt.compareSync(password, user.password)) {
+    .then(user => {
+      if (user && bcrypt.compareSync(password, user.password)) {
         // produce token
-        const token = generateToken(admin);
+        const token = generateToken(user);
 
         // add token to response
         res.status(200).json({
-          message: `Welcome ${admin.username}!`,
+          message: `Welcome ${user.username}!`,
           token,
         });
       } else {
@@ -44,10 +44,10 @@ router.post('/login', (req, res) => {
     });
 });
 
-function generateToken(admin) {
+function generateToken(user) {
   const payload = {
-    username: admin.username,
-    subject: admin.id,
+    username: user.username,
+    subject: user.id,
   };
   const options = {
     expiresIn: '1h',

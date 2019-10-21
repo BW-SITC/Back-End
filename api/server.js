@@ -5,7 +5,7 @@ const authenticate = require('../auth/authenticate-middleware.js');
 const authRouter = require('../auth/auth-router.js');
 const adminRouter = require('../admin/admin-router.js');
 const volunteerRouter = require('../volunteer/volunteer-router.js');
-const studentRouter = require('../student/student-router.js');
+
 
 
 const server = express();
@@ -15,35 +15,16 @@ server.use(cors());
 server.use(express.json());
 
 server.use('/api/auth', authRouter);
-server.use('/api/admin/', authenticateAdmin, adminRouter);
+server.use('/api/admin', authenticateAdmin, adminRouter);
 server.use('/api/volunteer/', authenticateVolunteer, volunteerRouter);
-server.use('/api/student/', authenticateStudent, studentRouter);
+server.use('/api/student/', studentRouter);
 
 
-server.get('/api/admin/', (req, res) => {
+
+server.get('/api/', (req, res) => {
    
   });
-  server.get('/api/volunteer/', (req, res) => {
-   
-});
-server.get('/api/student/', (req, res) => {
-   
-});
-  server.post('/api/admin/', (req, res) => {
-   
-  });
-  server.put('/api/admin/', (req, res) => {
-   
-});
-server.delete('/api/admin/', (req, res) => {
-   
-});
-server.delete('/api/volunteer/', (req, res) => {
-   
-});
-server.post('/api/student/', (req, res) => {
-   
-});
+ 
 
 
 
