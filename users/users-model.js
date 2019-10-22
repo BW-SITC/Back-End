@@ -71,7 +71,7 @@ function findById(id) {
 
 function removeMeeting(id) {
     return db('meetings')
-    .where('id', id)
+    .where({ id })
     .del();
 }
 
@@ -93,6 +93,6 @@ function updateTodo(changes, id) {
 
 function removeTodo(id) {
   return db('todos')
-  .where('id', id)
+  .where({ id })
   .del();
 }
