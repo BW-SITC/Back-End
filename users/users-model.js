@@ -56,7 +56,7 @@ function findById(id) {
   function findMeetings(userId) {
     return db('meetings')
       .join('users', 'users.id', 'meetings.user_id')
-      .select('meetings.meetingTime')
+      .select('meetings.meetingTime', "meetings.id")
       .where({ user_id: userId });
   }
   function addMeeting(meeting, id) {
@@ -78,7 +78,7 @@ function removeMeeting(id) {
 function findTodos(userId) {
   return db('todos')
     .join('users', 'users.id', 'todos.user_id')
-    .select('todos.instructions')
+    .select('todos.instructions', "todos.id")
     .where({ user_id: userId });
 }
 function addTodo(todo, id) {

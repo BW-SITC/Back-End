@@ -31,7 +31,7 @@ router.post('/:id/todos', (req, res) => {
     const { id } = req.params;
     const changes = req.body;
   
-    Users.findById(id)
+    Users.findTodos(id)
     .then(user => {
       if (user) {
         Users.updateTodo(changes, id)
