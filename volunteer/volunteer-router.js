@@ -40,7 +40,7 @@ router.delete('/:id/todos', (req, res) => {
     
   const { id } = req.params;
 
-  Users.findTodos(id)
+  Users.findToDoById(id)
   .then(user => {
       if(user) {
   Users.removeTodo(id)
@@ -76,7 +76,7 @@ router.get('/:id/meetings', (req, res) => {
   router.delete('/:id/meetings', (req, res) => {
     const { id } = req.params;
 
-    Users.findMeetings(id)
+    Users.findMeetingById(id)
     .then(user => {
         if(user) {
     Users.removeMeeting(id)

@@ -7,6 +7,8 @@ module.exports = {
   findBy,
   findAdminBy,
   findById,
+  findToDoById,
+  findMeetingById,
   findAdminById,
   findMeetings,
   addMeeting,
@@ -52,6 +54,19 @@ function findById(id) {
       .select('id', 'name','days','availibleTime','country' )
       .where({ id })
       .first();
+  }
+  function findToDoById(id) {
+    return db('todos')
+      .select('id', 'instructions' )
+      .where({ id })
+      .first();
+  }
+  function findMeetingById(id){
+    return db('meetings') 
+    .select('id', 'meetingTime' )
+    .where({ id })
+    .first();
+    
   }
   function findMeetings(userId) {
     return db('meetings')
