@@ -37,16 +37,21 @@ router.get('/:id/todos', (req, res) => {
 
 
 router.delete('/:id/todos', (req, res) => {
+    
   const { id } = req.params;
 
+  Users.findById(id)
+  .then(user => {
+      if(user) {
   Users.removeTodo(id)
   .then(deleted => {
-    if (deleted) {
-      res.json({ removed: deleted });
-    } else {
+      res.json(deleted);
+    });
+ } else {
       res.status(404).json({ message: 'Could not find todo with given id' });
     }
   })
+
   .catch(err => {
     res.status(500).json({ message: 'Failed to delete todo' });
   });
@@ -70,12 +75,15 @@ router.get('/:id/meetings', (req, res) => {
 
   router.delete('/:id/meetings', (req, res) => {
     const { id } = req.params;
-  
+
+    Users.findById(id)
+    .then(user => {
+        if(user) {
     Users.removeMeeting(id)
     .then(deleted => {
-      if (deleted) {
-        res.json({ removed: deleted });
-      } else {
+            res.json(deleted);
+          });
+       } else {
         res.status(404).json({ message: 'Could not find meeting with given id' });
       }
     })
