@@ -168,7 +168,7 @@ describe('GET /api/student/ POST /api/auth/register POST /api/auth/login', () =>
           expect(meetings).toHaveLength(1);
         });
       });
-      it('should remove the provided todo from database ', async () => {
+      it('should remove the provided meetings from database ', async () => {
         let meetings = await meetings.addMeeting({ meetingTime: "Monday at 4pm with John" });
         expect(meetings.meetingTime).toBe("Monday at 4pm with John");
     

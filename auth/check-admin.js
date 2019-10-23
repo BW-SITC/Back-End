@@ -1,7 +1,9 @@
-module.exports = admin => {
+module.exports = () => {
     return (req, res, next) => {
       // check that the role that was in the token is the role passed as an argument?
-      if (admin === req.admin.admin) {
+      console.log(req.admin);
+      console.log(admin)
+      if ( req.user.username === "admin") {
         next();
       } else {
         res.status(403).json({ you: "can't touch this" });
