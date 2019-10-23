@@ -57,13 +57,13 @@ function findById(id) {
   }
   function findToDoById(id) {
     return db('todos')
-      .select('id', 'instructions' )
+      .select('id', 'instructions', 'user_id' )
       .where({ id })
       .first();
   }
   function findMeetingById(id){
     return db('meetings') 
-    .select('id', 'meetingTime' )
+    .select('id', 'meetingTime', "user_id" )
     .where({ id })
     .first();
     
@@ -71,7 +71,7 @@ function findById(id) {
   function findMeetings(userId) {
     return db('meetings')
       .join('users', 'users.id', 'meetings.user_id')
-      .select('meetings.meetingTime', "meetings.id")
+      .select('meetings.meetingTime', "meetings.id", "meetings.user_id")
       .where({ user_id: userId });
   }
   function addMeeting(meeting, id) {
@@ -93,7 +93,7 @@ function removeMeeting(id) {
 function findTodos(userId) {
   return db('todos')
     .join('users', 'users.id', 'todos.user_id')
-    .select('todos.instructions', "todos.id")
+    .select('todos.instructions', "todos.id", "todos.user_id")
     .where({ user_id: userId });
 }
 function addTodo(todo, id) {
