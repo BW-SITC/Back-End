@@ -15,7 +15,7 @@ server.use(cors());
 server.use(express.json());
 
 server.use('/api/auth', authRouter);
-server.use('/api/admin', restricted, checkAdmin ,adminRouter);
+server.use('/api/admin', restricted, checkAdmin, adminRouter);
 server.use('/api/volunteer/', restricted, volunteerRouter);
 server.use('/api/student/', studentRouter);
 
