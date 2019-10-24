@@ -38,7 +38,7 @@ router.post('/:id/todos', (req, res) => {
           res.json(updatedUser);
         });
       } else {
-        res.status(404).json({ message: 'Could not find user with given id' });
+        res.status(404).json({ message: 'Could not find todo with given id' });
       }
     })
     .catch (err => {
