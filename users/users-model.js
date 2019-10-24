@@ -49,6 +49,7 @@ function findAdminById(id) {
     .where({ id })
     .first();
 }
+
 function findById(id) {
     return db('users')
       .select('id', 'name','days','availibleTime','country' )
